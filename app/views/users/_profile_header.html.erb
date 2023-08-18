@@ -9,7 +9,9 @@
         <% unless user == current_user %>
           <%= button_to "Follow", "#", class: "btn btn-primary" %>
         <% end %>
-        <%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-transparent border" %>
+        <% if user == current_user %>
+          <%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-transparent border" %>
+        <% end %>
     </div>
 
     <div class="d-flex gap-5">
