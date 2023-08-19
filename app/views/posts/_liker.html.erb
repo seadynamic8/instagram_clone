@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-between">
   <div class="d-flex">
-    <%= image_tag "user-pp.png", 
+    <%= image_tag liker.profile_pic.attached? ? liker.profile_pic : "user-pp.png",
         class: "img-thumbnail rounded-circle", 
         style: "width: 2.5rem" %>
     <div class="d-flex flex-column mx-3 justify-content-center">

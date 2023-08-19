@@ -31,7 +31,7 @@
               <li>
                 <div class="d-flex justify-content-between" style="min-width: 20rem;">
                   <div class="d-flex">
-                    <%= image_tag "user-pp.png", 
+                    <%= image_tag fr.follower.profile_pic.attached? ? fr.follower.profile_pic : "user-pp.png", 
                         class: "img-thumbnail rounded-circle", 
                         style: "width: 2.5rem" %>
                     <div class="d-flex flex-column ms-3 justify-content-center">
