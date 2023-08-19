@@ -6,9 +6,9 @@
     <div class="d-flex gap-3 align-items-center">
         <p class="m-0 fw-bold"><%= user.username %></p>
         <%= button_to "Message", "#", class: "btn border border-1" %>
-        <% unless user == current_user %>
-          <%= button_to "Follow", "#", class: "btn btn-primary" %>
-        <% end %>
+        
+        <%= render "layouts/shared/follow_state", user: user %>
+
         <% if user == current_user %>
           <%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-transparent border" %>
         <% end %>
@@ -16,9 +16,8 @@
 
     <div class="d-flex gap-5">
       <small class="fw-bold"><%= pluralize(user.posts.count, "Post") %></small>
-      <small class="fw-bold"><%= pluralize(100, "Follower") %></small>
-      <small class="fw-bold"><%= pluralize(100, "Following") %></small>
-    </div>
+      <small class="fw-bold"><%= pluralize(user.followers.count, "Follower") %></small>
+      <small class="fw-bold"><%= pluralize(user.followings.count, "Following") %></small></div>
 
     <div class="d-flex flex-column">
       <small class="fw-bold"><%= user.full_name %></small>
