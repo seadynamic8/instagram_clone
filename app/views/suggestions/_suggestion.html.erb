@@ -1,17 +1,26 @@
 <div class="d-flex justify-content-between">
   <div class="d-flex">
-    <%= image_tag "user-pp.png", 
+    <%= image_tag suggestion.profile_pic.attached? ? suggestion.profile_pic : "user-pp.png",
         class: "img-thumbnail rounded-circle", 
         style: "width: 2.5rem" %>
     <div class="d-flex flex-column mx-3">
       <small class="fw-bold" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; max-width: 10rem">
-        Musta Code</small>
+        <%= link_to suggestion, data: {turbo: false}, class: "a-decoration-none" do %><%= suggestion.username %><% end %>
+      </small>
       <small class="" style="color: rgb(115, 115, 115); font-size: .75rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; max-width: 10rem;">
         Suggested for you by Instagram as he followed you before</small>
     </div>
   </div>
 
-  <%= link_to root_path, class: "text-decoration-none" do %>
-    <small class="fw-bold text-primary">Follow</small>
+  <% if current_user.waiting_followings.include?(suggestion) %>
+    <%= button_to cancel_request_path(user_id: suggestion.id), method: :delete, 
+          class: "btn btn-transparent border-0", data: {turbo: false} do %>
+      <small style="fw-bold text-secondary">Cancel</small>
+    <% end %>
+  <% else %>
+    <%= button_to follow_path(user_id: suggestion.id), method: :post, 
+          class: "btn btn-transparent border-0", data: {turbo: false} do %>
+      <small style="fw-bold text-secondary">Follow</small>
+    <% end %>
   <% end %>
 </div>
