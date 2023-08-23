@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sender: one
+  receiver: one
+  content: MyText
+  has_seen: false
+  seen_time: 2023-08-23 09:46:02
+
+two:
+  sender: two
+  receiver: two
+  content: MyText
+  has_seen: false
+  seen_time: 2023-08-23 09:46:02

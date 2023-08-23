@@ -19,6 +19,12 @@ class User < ApplicationRecord
   has_many :followings, through: :accepted_sent_requests, source: :followed
   has_many :waiting_followings, through: :waiting_sent_requests, source: :followed
 
+  has_many :sent_messages, class_name: "Message", foreign_key: "sender_id"
+  has_many :received_messages, class_name: "Message", foreign_key: "receiver_id"
+
+  has_many :users_sent_messages_to, through: :sent_messages, source: :receiver
+  has_many :users_received_messages_from, through: :received_messages, source: :sender
+
   def follow(user)
     Follow.create(follower: self, followed: user)
   end
@@ -29,5 +35,17 @@ class User < ApplicationRecord
 
   def cancel_request(user)
     self.waiting_sent_requests.find_by(followed: user)&.destroy
+  end
+
+  def send_message(user, message_content)
+    Message.create(sender: self, receiver: user, content: message_content)
+  end
+
+  def sent_messages_to(user) 
+    sent_messages.where(receiver: user)
+  end
+
+  def received_messages_from(user)
+    received_messages.where(sender: user)
   end
 end
