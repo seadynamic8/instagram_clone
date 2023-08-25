@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :posts
-  devise_for :users
+  devise_for :users, controllers: {
+    sessions: 'users/sessions'
+  }
   # get 'home/index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -19,4 +21,6 @@ Rails.application.routes.draw do
 
   post "accept_follow", to: "follows#accept_follow", as: :accept_follow
   delete "decline_follow", to: "follows#decline_follow", as: :decline_follow
+
+  resources :messages, only: [:index, :create]
 end

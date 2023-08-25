@@ -8,6 +8,21 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <style>
+      <%= ".msg-#{current_user&.id}" %> {
+        align-self: flex-end !important;
+      }
+
+      <%= ".msg-#{current_user&.id}" %> span {
+        background-color: #0095F6 !important;
+        color: white !important;
+      }
+
+      <%= ".msg-#{current_user&.id}" %> img {
+        display: none !important;
+      }
+    </style>
   </head>
 
   <body>

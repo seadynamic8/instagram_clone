@@ -22,8 +22,8 @@ class User < ApplicationRecord
   has_many :sent_messages, class_name: "Message", foreign_key: "sender_id"
   has_many :received_messages, class_name: "Message", foreign_key: "receiver_id"
 
-  has_many :users_sent_messages_to, through: :sent_messages, source: :receiver
-  has_many :users_received_messages_from, through: :received_messages, source: :sender
+  has_many :users_sent_messages_to, -> { distinct }, through: :sent_messages, source: :receiver
+  has_many :users_received_messages_from, -> { distinct }, through: :received_messages, source: :sender
 
   def follow(user)
     Follow.create(follower: self, followed: user)
@@ -47,5 +47,11 @@ class User < ApplicationRecord
 
   def received_messages_from(user)
     received_messages.where(sender: user)
+  end
+
+  def all_messages_with(user)
+    Message.where(sender: [self, user])
+      .or( Message.where(receiver: [self, user]) )
+      .order(:created_at)
   end
 end

@@ -9,6 +9,8 @@
     </button>
     
     <div class="d-flex">
+
+      <%# Search Bar %>
       <div class="collapse navbar-collapse me-5" id="navbarSupportedContent">
         <%= form_with url: users_path, method: :get, data: { turbo_frame: "search_results", controller: "search-results" } ,
               class: "d-flex" do |f| %>
@@ -28,13 +30,24 @@
       </div>
 
       <div class="navbar-collapse gap-4">
+
+        <%#  Home Link %>
         <%= link_to root_path, class: "text-dark" do %><i class="fa-solid fa-house fa-xl"></i><% end%>
-        <i class="fa-brands fa-facebook-messenger fa-xl"></i>
+
+        <%# Chat Link %>
+        <%= link_to messages_path, class: "text-dark" do %>
+          <i class="fa-brands fa-facebook-messenger fa-xl"></i>
+        <% end %>
+
+        <%# New Post Link %>
         <a type="button" class="text-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
           <i class="fa-regular fa-square-plus fa-xl"></i>
         </a>
+
+        <%# Discover Link %>
         <i class="fa-regular fa-compass fa-xl"></i>
 
+        <%# Followers Link %>
         <div class="btn-group dropstart">
           <i class="fa-regular fa-heart fa-xl" data-bs-toggle="dropdown" aria-expanded="false"></i>
           <ul class="dropdown-menu p-4">
@@ -68,6 +81,7 @@
           </ul>
         </div>
 
+        <%# User Profile Link %>
         <div class="dropdown">
           <a class="" role="button" data-bs-toggle="dropdown">
             <% if current_user && current_user.profile_pic.attached? %>

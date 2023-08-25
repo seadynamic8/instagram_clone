@@ -1,0 +1,7 @@
+<div class="message msg-<%= message.sender_id %>">
+  <%= image_tag profile_pic(message.sender),
+              class: "img-thumbnail rounded-circle",
+              style: "width: 2rem" %>
+
+  <span class="msg-content rounded-pill"><%= message.content %></span>
+</div>
