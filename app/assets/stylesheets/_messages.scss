@@ -1,0 +1,155 @@
+// @use "global/variables" as *;
+// @import "global/variables";
+@import "variables";
+
+.chat-side {
+  height: 100vh;
+  max-width: $sidebar-width;
+  width: $sidebar-width;
+  position: fixed;
+  z-index: 10;
+  top: $navbar-height;
+  left: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  .chat-user-list {
+    .user-info {
+      padding: 10px 20px;
+      
+      img {
+        width: 4rem;
+      }
+    }
+    
+    .selected {
+      background: $grey-color;
+    }
+  }
+}
+
+.chat-box {
+  position: fixed;
+  top: $navbar-height;
+  margin-left: $sidebar-width;
+  height: calc(100vh - #{$navbar-height});
+  width: calc(100% - #{$sidebar-width});
+
+  display: grid;
+  grid-template-rows: 5fr 90fr 5fr;
+  
+  .chat-header {
+    background: #fafafa;
+  }
+  
+  .messages-container {
+    transform: rotateX(180deg);
+    overflow-y: auto;
+  
+    .messages {
+      transform: rotateX(180deg);
+    }
+  }
+  
+  .messages {
+    gap: 20px;
+  
+    .msg-content {
+      padding: 10px 10px;
+      background-color: $grey-color;
+    }
+  
+    .send-message {
+  
+      .msg-content {
+        background-color: #0095F6;
+        color: white;
+      }
+    }
+  }
+
+  .chat-send {
+    background-color: #fafafa;
+
+    .chat-content-field {
+
+      &:focus {
+        box-shadow: none;
+      }
+      
+      &:focus-visible {
+        outline: none;
+      }
+    }
+  }
+}
+
+
+.no-messages {
+  margin-left: $sidebar-width;
+}
+
+
+.new-message {
+  
+  .modal-search {
+    padding: 7px 15px;
+    border-bottom: var(--bs-modal-header-border-width) solid var(--bs-modal-header-border-color);
+    
+    .user-search-form {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      
+      .search-query:focus-visible {
+        outline: none;
+      }
+    }
+  }
+
+  .search-result {
+
+    .user-info, .img-thumbnail, .username, .form-check, .form-check-input {
+      pointer-events: none;
+    }
+  }
+  
+  .modal-body {
+    height: 400px;
+    padding: 0;
+    margin-top: 10px;
+    overflow-y: auto;
+
+    .modal-search-results  {
+      margin: 0;
+      padding: 0;
+
+      .form-check-input {
+        width: 1.5em;
+        height: 1.5em;
+      }
+    }
+
+    .message-box {
+      border: none;
+      width: 100%;
+      height: 100%;
+      padding: 5px 10px;
+      resize: none;
+
+      &:focus-visible {
+        outline: none;
+      }
+    }
+  }
+
+  .modal-footer {
+    // width: 100%;
+    
+    .chat-button {
+      width: 100%;
+      
+    }
+  }
+}

@@ -12,17 +12,30 @@
 
       <%# Search Bar %>
       <div class="collapse navbar-collapse me-5" id="navbarSupportedContent">
-        <%= form_with url: users_path, method: :get, data: { turbo_frame: "search_results", controller: "search-results" } ,
+        <%= form_with url: users_path, method: :get, 
+              data: { 
+                turbo_frame: "search_results", 
+                controller: "search-results" 
+              } ,
               class: "d-flex" do |f| %>
 
           <div class="btn-group dropdown">
-            <%= f.text_field :search_query, class:"form-control me-2 border-0", type: "search",
-                  placeholder: "Search", "aria-label" => "Search", style:"background: #efefef",
-                  data: { "bs-toggle": "dropdown", action: "input->search-results#search" }, 
-                  "aria-expanded" => "false" %>
+            <%= f.text_field :search_query, 
+                  class:"form-control me-2 border-0",   
+                  type: "search",
+                  placeholder: "Search", 
+                  aria_label: "Search", aria_expanded: "false",
+                  style: "background: #efefef",
+                  data: { 
+                    bs_toggle: "dropdown", 
+                    action: "input->search-results#search" 
+                  } %>
+            
+            <%= f.hidden_field :search_target, value: :search_results %>
 
-            <ul class="dropdown-menu p-4 mt-2" style="width: 25rem">
-              <%= render "layouts/search_results", users: [] %>
+            <ul class="dropdown-menu mt-2" style="width: 25rem">
+              <%= render "layouts/search_results", users: []
+               %>
             </ul>
           </div>
 

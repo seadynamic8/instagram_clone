@@ -1,0 +1,28 @@
+.search_results_link {
+  text-decoration: none;
+}
+
+
+.search-result {
+  list-style-type: none;
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgb(239, 239, 239);
+  }
+}
+
+.user-info {
+  display: flex;
+  
+  img {
+    width: 3rem;
+  }
+  
+  .chat-username {
+    overflow: hidden; 
+    white-space: nowrap; 
+    text-overflow: ellipsis; 
+    font-weight: bold;
+  }
+}

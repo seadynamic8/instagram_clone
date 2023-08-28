@@ -5,12 +5,16 @@ class UsersController < ApplicationController
   def index
     if params[:search_query].present?
       @users = User.where("username LIKE ?", "%#{params[:search_query]}%")
+        .and(User.where.not(id: current_user.id))
     else
       @users = []
     end
 
-    if turbo_frame_request?
-      render partial: "layouts/search_results", locals: { users: @users }
+    respond_to do |format|
+      format.turbo_stream do
+        @partial_folder = 
+          params[:search_target] == "search_user_results" ? "messages" : "layouts"
+      end
     end
   end
 

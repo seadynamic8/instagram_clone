@@ -1,39 +1,51 @@
-<%= turbo_stream_from "chat" %>
-
 <div class="chat">
 
   <div class="chat-side border-end border-dark-subtle border-2">
 
-    <%# Username and Create New Button %>
+    <%= turbo_stream_from dom_id(current_user, :chat_list) %>
     <div class="d-flex justify-content-between align-items-center p-4">
+      <%# Username %>
       <span class="fw-bold fs-4">
         <%= current_user.username %>
       </span>
 
-      <i class="fa-regular fa-pen-to-square fa-xl"></i>
+      <%# New Message Requests %>
+      <%= link_to "#", 
+            class: "text-dark",
+            data: {
+              bs_toggle: "modal",
+              bs_target: "#newMessageModal"
+            } do %>
+        <i class="fa-regular fa-pen-to-square fa-xl"></i>
+      <% end %>
     </div>
 
     <%# Chat Users List Header %>
     <div class="d-flex justify-content-between align-items-center py-2 px-4">
       <small class="fw-bold">Messages</small>
 
-      <%= link_to "Requests", "#", class: "fw-bold text-muted" %>
+      <%# Invite Requests %>
+      <%= link_to "Requests", invites_path, class: "fw-bold text-muted" %>
     </div>
     
     <%# List of chat users %>
-    <div class="chat-user-list d-flex flex-column">
-      <% @chat_users.each do |chat_user| %>
-        <%= link_to messages_path, 
-                class: ("selected" if chat_user == @user_chatting_with) do %>
-          <%= render "chat_user_detail", chat_user: chat_user %>
-        <% end %>
-      <% end %>
+    <div class="chat-user-list d-flex flex-column" id="chat-user-list">
+      <%= render partial: "chat_user", collection: @chat_users,
+            locals: { user_chatting_with: @user_chatting_with } %>
     </div>
 
   </div>
 
-  <%= render "chat_box", 
-        user_chatting_with: @user_chatting_with, 
-        all_messages: @all_messages,
-        message: @message %>
+  <% if @chat_users.any? %>
+    
+    <%= render "chat_box", 
+          user_chatting_with: @user_chatting_with, 
+          all_messages: @all_messages,
+          message: @message %>
+  <% else %>
+
+    <%= render "no_messages" %>
+  <% end %>
 </div>
+
+<%= render "new_message" %>

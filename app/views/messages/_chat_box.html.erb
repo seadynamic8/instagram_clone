@@ -1,9 +1,11 @@
+<%= turbo_stream_from current_user.pair_id(user_chatting_with, :chat_box) %>
+
 <div class="chat-box">
 
   <%# Chat Box Header %>
   <div class="chat-header d-flex justify-content-between py-3 px-3 border-bottom border-2">
     
-    <%= render "chat_user_detail", chat_user: user_chatting_with %>
+    <%= render "layouts/shared/user_info", user: user_chatting_with %>
 
     <div class="d-flex flex-column">
 
@@ -20,10 +22,14 @@
   <%# Send Message Field %>
   <div class="chat-send">
 
-    <%= form_with model: message, url: messages_path do |f| %>
+    <%= form_with model: message, url: messages_path,
+          data: {
+            controller: "chat",
+            action: "turbo:submit-end->chat#clear"
+          } do |f| %>
       <div class="d-flex justify-content-between m-3 p-2 border border-2 border-light-subtle rounded-pill bg-white">
         <%= f.text_field :content, placeholder: "Message...", 
-              class: "border-0 form-control" %>
+              class: "chat-content-field border-0 form-control" %>
 
         <%= f.hidden_field :receiver_id %>
 

@@ -1,0 +1,4 @@
+<%= link_to messages_path(receiver: chat_user), 
+    class: "#{'selected' if chat_user == user_chatting_with} a-decoration-none" do %>
+  <%= render "layouts/shared/user_info", user: chat_user %>
+<% end %>

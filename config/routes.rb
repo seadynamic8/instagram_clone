@@ -23,4 +23,10 @@ Rails.application.routes.draw do
   delete "decline_follow", to: "follows#decline_follow", as: :decline_follow
 
   resources :messages, only: [:index, :create]
+
+  resources :invites, only: [:index, :show]
+  post "send_invite", to: "invites#send_invite", as: :send_invite
+  post "accept_invite/:id", to: "invites#accept_invite", as: :accept_invite
+  delete "decline_invite/:id", to: "invites#decline_invite", as: :decline_invite
+  
 end

@@ -1,3 +1,4 @@
+
 html {
   height: 100vh;
 }
@@ -106,4 +107,27 @@ body {
 .a-decoration-none {
   text-decoration: none;
   color: black;
+}
+
+@import "variables";
+
+// Flashes
+
+.alert {
+  position: absolute;
+  top: $navbar-height;
+  right: 0;
+  font-size: small;
+  font-weight: medium;
+  padding: 5px 10px;
+  color: black;
+  z-index: 99999;
+
+  .alert-success {
+    background-color: lightgreen;
+  }
+
+  .alert-danger {
+    background-color: lightcoral;
+  }
 }

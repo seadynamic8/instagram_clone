@@ -1,0 +1,65 @@
+@import "variables";
+
+.invites {
+  height: calc(100vh - #{navbar-height});
+}
+
+.invites-sidebar {
+  position: fixed;
+  width: $sidebar-width;
+  height: 100%;
+  padding-top: 20px;
+  
+  border-right: 2px solid $grey-color;
+  
+  .header {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    grid-template-rows: 60fr 40fr;
+    grid-template-areas: 
+    "back title"
+    "info info";
+    justify-items: center;
+    align-items: center;
+    row-gap: 20px;
+    padding-bottom: 20px;
+    
+    .back-button {
+      grid-area: back;
+    }
+    
+    .title {
+      grid-area: title;
+      justify-self: start;
+      margin: 0;
+    }
+    
+    .info {
+      grid-area: info;
+    }
+  }
+  
+  .invites-users-list {
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+
+    .invite-user {
+      padding: 1rem 1rem;
+      width: 100%;
+  
+      &.selected {
+        background-color: $grey-color;
+      }
+
+      &:hover {
+        cursor: pointer;
+        background-color: rgb(239, 239, 239);
+      }
+    }
+  }
+}
+
+.invite {
+  margin-left: $sidebar-width;
+}

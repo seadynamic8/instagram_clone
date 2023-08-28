@@ -1,0 +1,61 @@
+<div class="new-message modal fade" id="newMessageModal" tabindex="-1" aria-labelledby="newMessageModalLabel" aria-hidden="true" data-controller="new-message">
+  <div class="modal-dialog">
+    <div class="modal-content" >
+
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 w-100 text-center" id="newMessageModalLabel">New message</h1>
+
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-search">
+        <%= form_with url: users_path, method: :get, 
+                data: {
+                  new_message_target: "searchForm",
+                  turbo_stream: true
+                },
+                class: "user-search-form" do |f| %>
+
+          <%= f.label :search_query, "To:", class: "fw-bold" %>
+
+          <%= f.hidden_field :search_target, value: :search_user_results %>
+
+          <%= f.text_field :search_query, placeholder: "Search...",
+                class: "search-query border-0 flex-grow-1",
+                data: { 
+                  action: "input->new-message#search",
+                  new_message_target: "searchQuery"
+                } %>
+        <% end %>
+      </div>
+
+      <%= form_with url: send_invite_path, method: :post,
+            data: { new_message_target: "messageForm" } do |f| %>
+        <div class="modal-body d-flex flex-column">
+
+          <ul class="modal-search-results" id="modal-search-results"
+              data-new-message-target="searchResults">
+            <%= render "search_user_results", users: [] %>
+          </ul>
+
+          <%= f.hidden_field :user_id, 
+                data: { new_message_target: "messageReceiver" } %>
+
+          <%= f.text_area :message,
+                value: "Hi, I would like to chat with you...",
+                style: "display: none;",
+                class: "message-box",
+                data: { new_message_target: "messageBox" } %>
+        </div>
+
+        <div class="modal-footer">
+          <%= f.submit "Chat", type: "button", disabled: true,
+            class: "chat-button btn btn-primary form-control",
+            data: { new_message_target: "messageButton",
+              action: "click->new-message#submit" } %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

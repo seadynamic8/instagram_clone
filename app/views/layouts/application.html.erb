@@ -26,9 +26,13 @@
   </head>
 
   <body>
+    
     <% if current_user %>
       <%= render "layouts/navbar" %>
     <% end %>
+
+    <%= render "layouts/flash_messages" %>
+    
     <%= yield %>
   </body>
 </html>

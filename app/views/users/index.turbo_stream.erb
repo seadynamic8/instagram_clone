@@ -1,0 +1,3 @@
+<%= turbo_stream.update "modal-search-results",
+     partial: "#{@partial_folder}/#{params[:search_target]}", 
+     locals: { users: @users } %>

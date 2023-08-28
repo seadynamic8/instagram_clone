@@ -1,0 +1,26 @@
+<% users.each do |user| %>
+
+    <%= tag.li class: "search-result p-3 d-flex justify-content-between align-items-center",
+          data: { 
+            action: "click->new-message#setUser",
+            username: "#{user.username}",
+            user: "#{user.id}"
+          } do %>
+          
+      <div class="user-info d-flex align-items-center">
+        <%= image_tag profile_pic(user), 
+            class: "img-thumbnail rounded-circle", 
+            style: "width: 2.5rem" %>
+
+        <small class="username fw-bold flex-grow-1 ms-3" 
+            style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; max-width: 10rem">
+          <%= user.username %>
+        </small>
+      </div>
+
+      <div class="form-check">
+        <input class="form-check-input user-radio" type="radio" name="user-radio"data-new-message-target="radio">
+      </div>
+
+    <% end %>
+<% end %>

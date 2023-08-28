@@ -1,19 +1,20 @@
-<div class="chat-user-detail">
-  <%= image_tag profile_pic(chat_user),
+<div class="user-info">
+  <%= image_tag profile_pic(user),
                 class: "img-thumbnail rounded-circle" %>
 
   <div class="d-flex flex-column justify-content-center mx-3">
     <small class="chat-username">
-      <%= link_to chat_user, 
-                  data: {turbo: false}, 
+      <%= link_to_if local_assigns[:with_link],
+                  user, 
+                  data: { turbo: false }, 
                   class: "a-decoration-none" do %>
-        <%= chat_user.username %>
+        <%= user.username %>
       <% end %>
     </small>
 
-    <small class="" 
+    <%# <small class="" 
           style="color: rgb(115, 115, 115); font-size: .75rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; max-width: 10rem;">
       Active 5h ago
-    </small>
+    </small> %>
   </div>
 </div>

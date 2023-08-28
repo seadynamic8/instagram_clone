@@ -1,0 +1,36 @@
+<div class="invites">
+
+  <div class="invites-sidebar">
+    <div class="header">
+
+      <%# Back Link %>
+      <%= link_to messages_path, class: "back-button" do %>
+        <i class="fa-solid fa-arrow-left fa-xl"></i>
+      <% end %>
+
+      <h1 class="title fs-4">Message requests</h1>
+
+      <small class="info">Requests aren't marked as seen until you accept them.</small>
+    </div>
+
+
+    <div class="invites-users-list d-flex flex-column">
+
+      <% @invites.each do |invite| %>
+        <%= link_to invite_path(invite), method: :get, 
+              class: "invite-user a-decoration-none",
+              data: {
+                turbo_stream: true,
+                controller: "invite",
+                action: "click->invite#select"
+              } do %>
+
+          <%= render "layouts/shared/user_info", user: invite.sender %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="invite" id="invite-box">
+  </div>
+</div>

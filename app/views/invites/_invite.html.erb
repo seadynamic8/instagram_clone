@@ -1,0 +1,15 @@
+<div class="invite-header d-flex flex-between p-3 border-bottom border-secondary-subtle gap-4">
+  <%= render "layouts/shared/user_info", user: invite.sender %>
+
+  <div class="actions d-flex flex-between gap-2">
+    <%= button_to "Accept", accept_invite_path(invite), class: "btn btn-primary" %>
+    
+    <%= button_to "Decline", decline_invite_path(invite), method: :delete, 
+          class: "btn btn-secondary" %>
+  </div>
+</div>
+
+<div class="message p-4">
+  <%= invite.message %>
+</div>
+
