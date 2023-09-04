@@ -2,22 +2,22 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-import { application } from "./application"
+import { application } from "controllers/application"
 
-import ChatController from "./chat_controller"
+import ChatController from "controllers/chat_controller"
 application.register("chat", ChatController)
 
-import CommentsController from "./comments_controller"
+import CommentsController from "controllers/comments_controller"
 application.register("comments", CommentsController)
 
-import HelloController from "./hello_controller"
+import HelloController from "controllers/hello_controller"
 application.register("hello", HelloController)
 
-import InviteController from "./invite_controller"
+import InviteController from "controllers/invite_controller"
 application.register("invite", InviteController)
 
-import NewMessageController from "./new_message_controller"
+import NewMessageController from "controllers/new_message_controller"
 application.register("new-message", NewMessageController)
 
-import SearchResultsController from "./search_results_controller"
+import SearchResultsController from "controllers/search_results_controller"
 application.register("search-results", SearchResultsController)
